@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_TestingJNI_ioctl
   (JNIEnv *, jobject, jstring, jint);
 
+/*
+ * Class:     TestingJNI
+ * Method:    socket
+ * Signature: (Ljava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_TestingJNI_socket
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif

@@ -8,13 +8,18 @@ import java.lang.reflect.Field;
 public class TestingJNI {
 
 	native void ioctl(String dev, int descriptor);
+	native int socket(String port);
 	
 	static {
 		System.loadLibrary("ctest");
 	}
 	
     public static void main(String[] arg){
+    	
+    	TestingJNI nat = new TestingJNI();
+    	
         try {
+        	// Getting the file of the tun interface
             File f = new File("/dev/net/tun");
             RandomAccessFile file = new RandomAccessFile(f, "rws");
             FileDescriptor fd = file.getFD();
@@ -27,17 +32,18 @@ public class TestingJNI {
             FileInputStream input = new FileInputStream(fd);
 
             //use of Java Native Interface
-            new TestingJNI().ioctl("tun77", descriptor);
-
+            nat.ioctl("tun77", descriptor); // default interface set as tun77
+            
             while(true){
                 System.out.println("reading");
                 byte[] bytes = new byte[2000];
                 int l = 0;
-                l = input.read(bytes);
+                l = input.read(bytes); // this is reading from tun interface
                 
                 print(bytes, l);
                 
-                output.write(bytes);
+                output.write(bytes); // This is writing back to tun interface
+                
                 
             }
             
