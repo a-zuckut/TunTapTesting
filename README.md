@@ -3,7 +3,7 @@
 
 This project is meant to show the feasibility of gathering TUN/TAP frame on linux.
 
-# Building java program
+### Building java program
 
 1. Compile java file. `javac TestingJNI.java`
 
@@ -19,7 +19,7 @@ This project is meant to show the feasibility of gathering TUN/TAP frame on linu
 4. Running java class. `java -Djava.library.path=. TestingJNI`
 
 
-# Creating TUN Interface
+### Creating TUN Interface
 
 This is to send persistent data to our .java program. (using ping)
 
@@ -27,14 +27,14 @@ This is to send persistent data to our .java program. (using ping)
 2. `ip link set tun77 up`
 3. `ip addr add 10.0.0.1/24 dev tun77`
 
-# Final Step
+
 
 Run `ping 10.0.0.2` which will send though tun77 and if you have the java program running,
-you will see the ping data being read and printed.
+you will see the ping data being read and outputted.
 
-# Next Steps
+
 
 Perhaps the best next steps would be sending bytes back to the network. For that we need an address
-and sending data back through that address?
+and sending data back throught that address?
 
 
