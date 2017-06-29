@@ -1,8 +1,9 @@
 import java.io.File;
 import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 public class TestingJNI {
 
@@ -22,6 +23,8 @@ public class TestingJNI {
             field.setAccessible(true);
             int descriptor = field.getInt(fd);
 
+            FileOutputStream output = new FileOutputStream(fd);
+            FileInputStream input = new FileInputStream(fd);
 
             //use of Java Native Interface
             new TestingJNI().ioctl("tun77", descriptor);
@@ -30,29 +33,32 @@ public class TestingJNI {
                 System.out.println("reading");
                 byte[] bytes = new byte[2000];
                 int l = 0;
-                l = file.read(bytes);
+                l = input.read(bytes);
                 
-                for(int i = 0; i < l; i++) {
-                	
-                	System.out.print((bytes[i] & 0xFF) + " ");
-                }
+                print(bytes, l);
                 
-                System.out.println();
-                
-                // How could I read this byte[]
-                
-                // see if I can write back to the file
+                output.write(bytes);
                 
             }
+            
+//            output.close();
+//            input.close();
             
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+    
     public static int unsignedToBytes(byte b) {
         return b & 0xFF;
-      }
+    }
     
+    public static void print(byte[] bytes, int length) {
+    	for(int i = 0; i < length; i++) {
+        	System.out.print(unsignedToBytes(bytes[i]) + " ");
+        }
+        
+        System.out.println();
+    }
     
 }
