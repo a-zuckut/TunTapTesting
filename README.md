@@ -30,11 +30,11 @@ This is to send persistent data to our .java program. (using ping)
 # Final Step
 
 Run `ping 10.0.0.2` which will send though tun77 and if you have the java program running,
-you will see the ping data being read and outputted.
+you will see the ping data being read and printed.
 
 # Next Steps
 
 Perhaps the best next steps would be sending bytes back to the network. For that we need an address
-and sending data back throught that address?
+and sending data back through that address?
 
 
