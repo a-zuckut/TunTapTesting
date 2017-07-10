@@ -7,6 +7,16 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef TestingJNI_IPV4_FLAGS_MOREFRAG
+#define TestingJNI_IPV4_FLAGS_MOREFRAG 1L
+#undef TestingJNI_IPV4_FLAGS_DONTFRAG
+#define TestingJNI_IPV4_FLAGS_DONTFRAG 2L
+#undef TestingJNI_IPV4_FLAGS_MASK
+#define TestingJNI_IPV4_FLAGS_MASK 7L
+#undef TestingJNI_IPV4_FLAGS_SHIFT
+#define TestingJNI_IPV4_FLAGS_SHIFT 13L
+#undef TestingJNI_IPV4_OFFSET_MASK
+#define TestingJNI_IPV4_OFFSET_MASK 8191L
 /*
  * Class:     TestingJNI
  * Method:    ioctl

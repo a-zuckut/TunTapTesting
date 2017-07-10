@@ -17,10 +17,13 @@
 #include <stdarg.h>
 #include "TestingJNI.h"
 
+#define PORT 55555
+
 JNIEXPORT void JNICALL Java_TestingJNI_ioctl
-  (JNIEnv * env, jobject jobj, jstring string, jint descriptor) {
-  
+  (JNIEnv * env, jobject obj, jstring string, jint descriptor) {
+  printf("start ioctl...\n");
   const char* dev = (*env)->GetStringUTFChars(env, string, 0);
+  char cloneDev[16] = "/dev/net/tun";
   
   struct ifreq ifr;
   memset(&ifr, 0, sizeof(ifr));
@@ -29,9 +32,16 @@ JNIEXPORT void JNICALL Java_TestingJNI_ioctl
   strncpy(ifr.ifr_name, dev, IFNAMSIZ);
   int err;
 
+  // Turn on Tun Interface
   if ( (err = ioctl(descriptor, TUNSETIFF, (void *) &ifr)) == -1 ) {
-      perror("ioctl TUNSETIFF");
+      printf("Error ioctl()");
       exit(1);
   }
+  printf("Established interface\n\n");
   return;
 }
+
+
+
+
+
