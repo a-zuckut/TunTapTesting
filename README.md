@@ -16,14 +16,15 @@ This project is meant to show the feasibility of gathering TUN/TAP frame on linu
 	
 	Note: Linux uses .so files as library files. This is different in mac/windows. Mac: .dylib; Windows: .dll
 	
-4. Running java class. `java -Djava.library.path=. TestingJNI`
+4. Running java class. `sudo java -Djava.library.path=. TestingJNI`
 
 
 ### Creating TUN Interface
 
 This is to send persistent data to our .java program. (using ping)
 
-1. `openvpn -mktun --dev tun77`
+(You might need to have run as root)
+1. `openvpn --mktun --dev tun77`
 2. `ip link set tun77 up`
 3. `ip addr add 10.0.0.1/24 dev tun77`
 
